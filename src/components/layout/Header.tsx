@@ -31,22 +31,21 @@ export function Header() {
         <header
             className={cn(
                 'fixed top-0 w-full z-50 transition-all duration-300',
-                isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'
+                isScrolled
+                    ? 'bg-[#0a1f1a]/95 backdrop-blur-md border-b border-emerald-500/20 shadow-lg py-4'
+                    : 'bg-[#0a1f1a]/40 backdrop-blur-sm py-6'
             )}
         >
             <div className="container mx-auto px-4 flex justify-between items-center">
                 {/* Logo */}
                 <Link href="/" className="flex items-center">
-                    <div className="relative h-12 w-48">
+                    <div className="relative h-14 w-52">
                         <Image
-                            src="/logo.png"
+                            src="/logo-new.png"
                             alt="Tam Giang Capital"
                             fill
                             sizes="200px"
-                            className={cn(
-                                "object-contain object-left transition-all duration-300",
-                                isScrolled && "invert brightness-0" // Turn white logo to black on scroll
-                            )}
+                            className="object-contain object-left transition-all duration-300"
                             priority
                         />
                     </div>
@@ -59,8 +58,8 @@ export function Header() {
                             key={item.name}
                             href={item.href}
                             className={cn(
-                                "text-sm font-medium transition-colors hover:text-emerald-500",
-                                isScrolled ? "text-gray-900" : "text-white/90 hover:text-white"
+                                "text-sm font-medium transition-colors hover:text-emerald-400",
+                                isScrolled ? "text-slate-200" : "text-white/90 hover:text-white"
                             )}
                         >
                             {item.name}
@@ -72,7 +71,7 @@ export function Header() {
                 <button
                     className={cn(
                         "md:hidden p-2 transition-colors",
-                        isScrolled ? "text-gray-900" : "text-white"
+                        isScrolled ? "text-emerald-400" : "text-white"
                     )}
                     onClick={() => setIsOpen(!isOpen)}
                 >
@@ -82,12 +81,12 @@ export function Header() {
 
             {/* Mobile Nav */}
             {isOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 px-4 flex flex-col space-y-4">
+                <div className="md:hidden absolute top-full left-0 w-full bg-[#0a1f1a] border-t border-emerald-500/10 shadow-lg py-4 px-4 flex flex-col space-y-4">
                     {navItems.map((item) => (
                         <Link
                             key={item.name}
                             href={item.href}
-                            className="text-gray-900 font-medium hover:text-emerald-600"
+                            className="text-slate-200 font-medium hover:text-emerald-400"
                             onClick={() => setIsOpen(false)}
                         >
                             {item.name}

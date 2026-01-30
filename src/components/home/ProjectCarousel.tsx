@@ -6,6 +6,7 @@ import Link from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const projects = [
     {
@@ -49,52 +50,59 @@ export function ProjectCarousel() {
     const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 5000 })]);
 
     return (
-        <section className="py-20 bg-white">
-            <div className="container mx-auto px-4 mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-2">
-                    Các dự án của Tam Giang Capital
-                </h2>
-                <div className="w-20 h-1 bg-emerald-500 mx-auto rounded-full"></div>
-            </div>
+        <section className="py-24 bg-white overflow-hidden">
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+            >
+                <div className="container mx-auto px-4 mb-16">
+                    <h2 className="text-4xl md:text-5xl font-bold text-center text-slate-900 mb-6 font-serif">
+                        Hệ Sinh Thái Tam Giang Capital
+                    </h2>
+                    <div className="w-24 h-1.5 bg-emerald-500 mx-auto rounded-full"></div>
+                </div>
 
-            <div className="container mx-auto px-4 overflow-hidden" ref={emblaRef}>
-                <div className="flex -ml-4">
-                    {projects.map((project, index) => (
-                        <div key={index} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] min-w-0 pl-4">
-                            <div className="group relative h-[400px] rounded-2xl overflow-hidden shadow-lg transition-all hover:shadow-2xl">
-                                {/* Background Image */}
-                                <Image
-                                    src={project.image}
-                                    alt={project.title}
-                                    fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
+                <div className="container mx-auto px-4 overflow-hidden" ref={emblaRef}>
+                    <div className="flex -ml-4">
+                        {projects.map((project, index) => (
+                            <div key={index} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] min-w-0 pl-4">
+                                <div className="group relative h-[450px] rounded-3xl overflow-hidden shadow-xl transition-all hover:shadow-2xl border border-slate-100">
+                                    {/* Background Image */}
+                                    <Image
+                                        src={project.image}
+                                        alt={project.title}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
 
-                                {/* Gradient Overlay */}
-                                <div className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-80 md:opacity-0 md:group-hover:opacity-90 transition-opacity duration-300`}></div>
+                                    {/* Gradient Overlay */}
+                                    <div className={`absolute inset-0 bg-gradient-to-t ${project.color} opacity-80 md:opacity-0 md:group-hover:opacity-90 transition-opacity duration-300`}></div>
 
-                                {/* Content */}
-                                <div className="absolute inset-0 p-6 flex flex-col justify-end text-white translate-y-4 md:translate-y-[60%] md:group-hover:translate-y-0 transition-transform duration-300">
-                                    <h3 className="text-2xl font-bold mb-2 translate-y-0 md:-translate-y-10 md:group-hover:translate-y-0 transition-transform duration-300">
-                                        {project.title}
-                                    </h3>
-                                    <p className="text-sm md:text-base mb-6 opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 delay-75">
-                                        {project.description}
-                                    </p>
+                                    {/* Content */}
+                                    <div className="absolute inset-0 p-8 flex flex-col justify-end text-white translate-y-4 md:translate-y-[60%] md:group-hover:translate-y-0 transition-transform duration-300">
+                                        <h3 className="text-2xl font-bold mb-3 translate-y-0 md:-translate-y-12 md:group-hover:translate-y-0 transition-transform duration-300 font-serif">
+                                            {project.title}
+                                        </h3>
+                                        <p className="text-sm md:text-base mb-8 opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 delay-75 font-light">
+                                            {project.description}
+                                        </p>
 
-                                    <Link
-                                        href={project.link}
-                                        target="_blank"
-                                        className="inline-flex items-center text-sm font-semibold uppercase tracking-wider hover:text-emerald-300 transition-colors md:opacity-0 md:group-hover:opacity-100 duration-300 delay-100"
-                                    >
-                                        Xem dự án <ArrowRight className="ml-2 w-4 h-4" />
-                                    </Link>
+                                        <Link
+                                            href={project.link}
+                                            target="_blank"
+                                            className="inline-flex items-center text-sm font-bold uppercase tracking-widest hover:text-emerald-300 transition-colors md:opacity-0 md:group-hover:opacity-100 duration-300 delay-100"
+                                        >
+                                            Khám phá <ArrowRight className="ml-2 w-5 h-5" />
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 }

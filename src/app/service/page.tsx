@@ -1,5 +1,7 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const HERO_BG = '/images/slider_map.png'; // Using generic map or pattern if specific BG missing, or white.
 // Fusion config says bg color white/light green.
@@ -76,10 +78,10 @@ export default function ServicePage() {
                         <h2 className="text-3xl font-bold text-slate-900 mb-12">Dự án đã triển khai thực tế</h2>
                         <ul className="space-y-6">
                             {[
+                                'dichvubhxh.vn',
+                                'muabhyt.vn',
                                 'congdichvubhxh.vn',
-                                'dichvucongbhxh.com',
-                                'congdichvubhxh.com',
-                                'bhgiadinh.net'
+
                             ].map((site, i) => (
                                 <li key={i} className="flex items-center text-xl text-slate-700 hover:text-orange-600 transition-colors">
                                     <span className="bg-slate-200 text-slate-500 w-8 h-8 rounded-full flex items-center justify-center text-sm mr-4 font-bold">{i + 1}</span>
@@ -109,34 +111,60 @@ export default function ServicePage() {
             {/* Stats Section */}
             <section className="py-24 bg-white">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12"
+                    >
                         {/* Circle 1 */}
-                        <div className="flex flex-col items-center group">
-                            <div className="w-48 h-48 rounded-full border-4 border-dashed border-slate-200 flex items-center justify-center mb-6 group-hover:border-orange-500 transition-colors duration-500">
-                                <span className="text-5xl font-bold text-slate-800">15K+</span>
+                        <article className="flex flex-col items-center group">
+                            <div className="w-48 h-48 rounded-full border-4 border-dashed border-emerald-200 flex items-center justify-center mb-6 group-hover:border-emerald-500 transition-all duration-500 bg-white/50 backdrop-blur-sm">
+                                <span className="text-5xl font-bold text-emerald-900">5+</span>
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 uppercase tracking-wide">Khách hàng</h3>
-                            <p className="text-slate-500 mt-2 text-sm italic">
-                                *và không ngừng tăng lên mỗi ngày
-                            </p>
-                        </div>
+                            <h3 className="text-xl font-bold text-slate-900 uppercase tracking-wide text-center">Năm kinh nghiệm xây dựng hệ thống</h3>
+                        </article>
 
                         {/* Circle 2 */}
-                        <div className="flex flex-col items-center group">
-                            <div className="w-48 h-48 rounded-full border-4 border-dashed border-slate-200 flex items-center justify-center mb-6 group-hover:border-orange-500 transition-colors duration-500">
-                                <span className="text-5xl font-bold text-slate-800">10+</span>
+                        <article className="flex flex-col items-center group">
+                            <div className="w-48 h-48 rounded-full border-4 border-dashed border-emerald-200 flex items-center justify-center mb-6 group-hover:border-emerald-500 transition-all duration-500 bg-white/50 backdrop-blur-sm">
+                                <span className="text-5xl font-bold text-emerald-900">10+</span>
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 uppercase tracking-wide">Sản phẩm dịch vụ cúng cấp</h3>
-                        </div>
+                            <h3 className="text-xl font-bold text-slate-900 uppercase tracking-wide text-center">Sản phẩm dịch vụ cung cấp</h3>
+                        </article>
 
                         {/* Circle 3 */}
-                        <div className="flex flex-col items-center group">
-                            <div className="w-48 h-48 rounded-full border-4 border-dashed border-slate-200 flex items-center justify-center mb-6 group-hover:border-orange-500 transition-colors duration-500">
-                                <span className="text-5xl font-bold text-slate-800">99.9%</span>
+                        <article className="flex flex-col items-center group">
+                            <div className="w-48 h-48 rounded-full border-4 border-dashed border-emerald-200 flex items-center justify-center mb-6 group-hover:border-emerald-500 transition-all duration-500 bg-white/50 backdrop-blur-sm">
+                                <span className="text-5xl font-bold text-emerald-900">5+</span>
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 uppercase tracking-wide">Khách hàng hài lòng</h3>
-                        </div>
-                    </div>
+                            <h3 className="text-xl font-bold text-slate-900 uppercase tracking-wide text-center">Hệ sinh thái liên kết đa ngành</h3>
+                        </article>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="py-24 bg-slate-900 text-white overflow-hidden relative">
+                <div className="absolute inset-0 opacity-10 blur-3xl bg-emerald-500 rounded-full -translate-x-1/2 -translate-y-1/2" />
+                <div className="container mx-auto px-4 relative z-10 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-4xl md:text-5xl font-bold mb-8">Sẵn sàng hợp tác cùng Tam Giang Capital?</h2>
+                        <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
+                            Chúng tôi luôn chào đón các đối tác chiến lược có cùng tầm nhìn và khát khao kiến tạo giá trị đột phá.
+                        </p>
+                        <a
+                            href="mailto:contact@tamgiangcapital.com"
+                            className="inline-flex items-center px-12 py-5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-xl shadow-emerald-500/20"
+                        >
+                            Liên hệ hợp tác ngay
+                        </a>
+                    </motion.div>
                 </div>
             </section>
 

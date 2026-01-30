@@ -1,12 +1,40 @@
 'use client';
 
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 import type { Container, Engine } from "tsparticles-engine";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
+const phrases = [
+    "Nếu muốn đi xa, hãy đi cùng nhau",
+    "Hành trình vạn dặm, khởi đầu từ một bước chân",
+    "Kiến Tạo Giá Trị - Vững Bước Tương Lai",
+    "Hợp tác chiến lược, kiến tạo thịnh vượng",
+    "Hệ sinh thái đa ngành - Vươn tầm vóc mới"
+];
+
+const keywords = ["ĐA NGÀNH", "BỀN VỮNG", "ĐỘT PHÁ", "KỸ THUẬT SỐ"];
 
 export function Hero() {
+    const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+    const [currentKeywordIndex, setCurrentKeywordIndex] = useState(0);
+
+    useEffect(() => {
+        const phraseInterval = setInterval(() => {
+            setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
+        }, 4500);
+
+        const keywordInterval = setInterval(() => {
+            setCurrentKeywordIndex((prev) => (prev + 1) % keywords.length);
+        }, 3000);
+
+        return () => {
+            clearInterval(phraseInterval);
+            clearInterval(keywordInterval);
+        };
+    }, []);
+
     const particlesInit = useCallback(async (engine: Engine) => {
         await loadSlim(engine);
     }, []);
@@ -20,6 +48,12 @@ export function Hero() {
             >
                 <div className="absolute inset-0 bg-black/60" /> {/* Dark Overlay */}
             </div>
+
+            {/* World Map Overlay */}
+            <div
+                className="absolute inset-0 bg-[length:90%] bg-no-repeat bg-center z-5 opacity-10 pointer-events-none"
+                style={{ backgroundImage: 'url(/images/world-map.png)' }}
+            />
 
             {/* Particles */}
             <Particles
@@ -69,17 +103,54 @@ export function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="max-w-4xl mx-auto"
+                    className="max-w-4xl mx-auto flex flex-col items-center"
                 >
-                    <h2 className="text-xl md:text-2xl font-light mb-6 text-emerald-400 uppercase tracking-[0.2em]">
-                        Kiến Tạo Giá Trị - Vững Bước Tương Lai
-                    </h2>
-                    <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight font-serif">
-                        HỆ SINH THÁI <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">ĐA NGÀNH</span>
+                    {/* Welcome Badge */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
+                        className="mb-6 px-4 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-sm"
+                    >
+                        <span className="text-xs md:text-sm font-medium tracking-[0.3em] text-emerald-400 uppercase">
+                            Welcome to Tam Giang Capital
+                        </span>
+                    </motion.div>
+
+                    <div className="h-12 mb-6 overflow-hidden">
+                        <AnimatePresence mode="wait">
+                            <motion.h2
+                                key={currentPhraseIndex}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.5, ease: "easeInOut" }}
+                                className="text-xl md:text-2xl font-light text-slate-300 uppercase tracking-[0.2em]"
+                            >
+                                {phrases[currentPhraseIndex]}
+                            </motion.h2>
+                        </AnimatePresence>
+                    </div>
+
+                    <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight font-serif h-[1em] flex items-center justify-center gap-x-4">
+                        <span className="shrink-0">HỆ SINH THÁI</span>
+                        <div className="relative inline-block overflow-hidden h-full min-w-[5em] text-left">
+                            <AnimatePresence mode="wait">
+                                <motion.span
+                                    key={currentKeywordIndex}
+                                    initial={{ opacity: 0, y: 40 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -40 }}
+                                    transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+                                    className="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 whitespace-nowrap"
+                                >
+                                    {keywords[currentKeywordIndex]}
+                                </motion.span>
+                            </AnimatePresence>
+                        </div>
                     </h1>
 
-                    <div className="text-lg md:text-2xl font-light text-gray-300 space-y-2 mb-10">
+                    <div className="text-lg md:text-2xl font-light text-gray-400 space-y-2 mb-10">
                         <p>Dịch vụ số • Esports • Đầu tư • Nông nghiệp công nghệ cao</p>
                     </div>
 

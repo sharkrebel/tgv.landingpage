@@ -46,19 +46,15 @@ export function Footer() {
 
                 {/* Office */}
                 <div>
-                    <h3 className="text-white font-semibold mb-6">Office</h3>
-                    <ul className="space-y-3 text-sm">
+                    <h4 className="text-lg font-bold mb-6 text-white border-l-4 border-emerald-500 pl-4">Thông tin liên hệ</h4>
+                    <ul className="space-y-4 text-slate-400">
                         <li className="flex items-start">
                             <span className="mr-2 mt-1 block w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
-                            <span>Ho Chi Minh City, Vietnam</span>
+                            <span>Address: TP. Hồ Chí Minh, Việt Nam</span>
                         </li>
                         <li className="flex items-start">
                             <span className="mr-2 mt-1 block w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
-                            <span>contact@tamgiangcapital.com</span>
-                        </li>
-                        <li className="flex items-start">
-                            <span className="mr-2 mt-1 block w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
-                            <span>(+84) 999 999 999</span>
+                            <span>Email: contact@tamgiangcapital.com</span>
                         </li>
                     </ul>
                 </div>
